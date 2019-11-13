@@ -1,5 +1,4 @@
-FROM python:3.7-slim
-
+FROM ubuntu:latest
 LABEL "maintainer"="AutoBuilder24x7 <autobuilder247@gmail.com>"
 LABEL "repository"="https://github.com/ansible/ansible-molecule-action"
 LABEL "homepage"="https://github.com/ansible/ansible-molecule-action"
