@@ -14,42 +14,6 @@ parse_args() {
         opts="$opts -q"
         shift
         ;;
-      -c)
-        opts="$opts -c $2"
-        shift 2
-        ;;
-      -p)
-        opts="$opts -p"
-        shift
-        ;;
-      -r)
-        opts="$opts -r $2"
-        shift 2
-        ;;
-      -R)
-        opts="$opts -R"
-        shift
-        ;;
-      -t)
-        opts="$opts -t $2"
-        shift 2
-        ;;
-      -x)
-        opts="$opts -x $2"
-        shift 2
-        ;;
-      --exclude)
-        opts="$opts --exclude=$2"
-        shift 2
-        ;;
-      --no-color)
-        opts="$opts --no-color"
-        shift
-        ;;
-      --parseable-severity)
-        opts="$opts --parseable-severity"
-        shift
-        ;;
       --) # end argument parsing
         shift
         break
@@ -76,20 +40,15 @@ parse_args() {
 #   $@: additional options
 # env:
 #   [required] TARGETS : Files or directories (i.e., playbooks, tasks, handlers etc..) to be linted
-ansible::lint() {
-  : "${TARGETS?No targets to check. Nothing to do.}"
-  : "${GITHUB_WORKSPACE?GITHUB_WORKSPACE has to be set. Did you use the actions/checkout action?}"
-  pushd ${GITHUB_WORKSPACE}
-
+ansible::molecule() {
   local opts=$(parse_args "$@" || exit 1)
-
-  ansible-lint -v --force-color $opts ${TARGETS}
+  molecule test
 }
 
 
 args=("$@")
 
 if [ "$0" = "$BASH_SOURCE" ] ; then
-  >&2 echo -E "\nRunning Ansible Lint...\n"
-  ansible::lint ${args[@]}
+  >&2 echo -E "\nRunning Molecule...\n"
+  ansible::molecule ${args[@]}
 fi
