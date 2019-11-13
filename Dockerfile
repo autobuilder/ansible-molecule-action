@@ -8,7 +8,7 @@ LABEL "com.github.actions.description"="Run Ansible molecule"
 LABEL "com.github.actions.icon"="activity"
 LABEL "com.github.actions.color"="gray-dark"
 
-RUN apt-get install pip
+RUN apt-get install python-pip
 
 RUN pip install molecule docke
 RUN pip install ansible
