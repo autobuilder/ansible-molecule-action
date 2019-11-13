@@ -1,0 +1,15 @@
+name: Ansible Molecule
+description: Run Ansible Using Molecule
+author: AutoBuilder24x7 <autobuilder247@gmail.com>
+
+inputs: 
+  args:
+    description: |
+
+runs:
+  using: docker
+  image: Dockerfile
+  args:
+  - ${{ inputs.args }}
+  env:
+    TARGETS: ${{ inputs.targets }}
